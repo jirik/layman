@@ -99,6 +99,9 @@ bash-exec:
 bash-demo:
 	docker-compose -f docker-compose.deps.demo.yml -f docker-compose.demo.yml run --rm layman bash
 
+bash-demo-exec:
+	docker-compose -f docker-compose.deps.demo.yml -f docker-compose.demo.yml exec layman bash
+
 bash-demo-root:
 	docker-compose -f docker-compose.deps.demo.yml -f docker-compose.demo.yml run --rm -u root layman bash
 
@@ -216,6 +219,9 @@ micka-restart:
 
 micka-bash:
 	docker-compose -f docker-compose.deps.yml exec micka bash
+
+nginx-restart:
+	docker-compose -f docker-compose.deps.demo.yml -f docker-compose.demo.yml up --force-recreate --no-deps -d nginx
 
 stop-all-docker-containers:
 	docker stop $$(docker ps -q)

@@ -95,9 +95,12 @@ services:
    nginx:
       image: nginx:1.16-alpine
       volumes:
-        - ./deps/nginx/sample/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./deps/nginx/sample/https.conf:/etc/nginx/conf.d/default.conf
+        - ./deps/nginx/sample/localhost.pem:/etc/nginx/conf.d/localhost.pem
+        - ./deps/nginx/sample/localhost-key.pem:/etc/nginx/conf.d/localhost-key.pem
       ports:
         - 80:80
+        - 443:443
       depends_on:
         - layman
         - layman_client
