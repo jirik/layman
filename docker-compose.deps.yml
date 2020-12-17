@@ -82,7 +82,6 @@ services:
         - ./deps/qgis/data:/data:ro
       environment:
         - LANG=en_EN.UTF-8
-        - QGIS_PROJECT_FILE=/data/osm.qgs
         - QGIS_SERVER_LOG_LEVEL=0  # INFO (log all requests)
         - DEBUG=1                  # display env before spawning QGIS Server
       depends_on:

@@ -70,6 +70,9 @@ restart-celery-dev:
 	docker-compose -f docker-compose.deps.yml -f docker-compose.dev.yml up --no-deps -d flower
 	docker-compose -f docker-compose.deps.yml -f docker-compose.dev.yml up --no-deps -d layman_client
 
+restart-qgis:
+	docker-compose -f docker-compose.deps.yml -f docker-compose.dev.yml up -d --force-recreate --no-deps qgis-server nginx
+
 prepare-dirs:
 	mkdir -p layman_data layman_data_test tmp
 

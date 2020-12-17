@@ -13,6 +13,7 @@ src/layman_settings.py
 /deps/*/data
 /deps/*/tmp
 /deps/*/log
+!/deps/qgis/data
 
 /deps/liferay/transit/*
 !/deps/liferay/transit/.gitkeep
