@@ -1,0 +1,9 @@
+name: IntegrationTests
+
+on: [push]
+
+jobs:
+  IntegrationTests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
