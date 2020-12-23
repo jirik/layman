@@ -13,12 +13,6 @@ jobs:
       uses: jimschubert/query-tag-action@v1
 
     - name: Find Tag
-      id: tagger_head
-      uses: jimschubert/query-tag-action@v1
-      with:
-        commit-ish: "HEAD"
-
-    - name: Find Tag
       id: tagger_head2
       uses: jimschubert/query-tag-action@v1
       with:
@@ -38,6 +32,5 @@ jobs:
         echo "branch: ${branch}"
         echo "${GITHUB_REF}"
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
-        echo 'Output from Find Tag: ${{steps.tagger_head.outputs.tag}}'
         echo 'Output from Find Tag: ${{steps.tagger_head2.outputs.tag}}'
         echo 'Output from Find Tag: ${{steps.tagger_empty.outputs.tag}}'
