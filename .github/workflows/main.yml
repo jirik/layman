@@ -25,7 +25,7 @@ jobs:
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
 
         echo "Commit SHA: ${GITHUB_SHA}" > version.txt
-        echo "Whole ref: ${GITHUB_REF}"" >> version.txt
+        echo "Whole ref: ${GITHUB_REF}" >> version.txt
         echo "branch: ${branch}" >> version.txt
         echo "tag: ${tag}" >> version.txt
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}' >> version.txt
