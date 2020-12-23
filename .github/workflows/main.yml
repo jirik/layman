@@ -12,25 +12,13 @@ jobs:
       id: tagger
       uses: jimschubert/query-tag-action@v1
 
-    - name: Find Tag
-      id: tagger_head2
-      uses: jimschubert/query-tag-action@v1
-      with:
-        commit-ish: "HEAD^"
-
-    - name: Find Tag
-      id: tagger_empty
-      uses: jimschubert/query-tag-action@v1
-      with:
-        commit-ish: ""
-
     - name: Echo variables
       run: |
         echo "Commit SHA: ${GITHUB_SHA}"
         echo "Whole ref: ${GITHUB_REF}"
         branch=${GITHUB_REF#refs/heads/}
+        tag=${GITHUB_REF#refs/tags/}
         echo "branch: ${branch}"
+        echo "tag: ${tag}"
         echo "${GITHUB_REF}"
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
-        echo 'Output from Find Tag: ${{steps.tagger_head2.outputs.tag}}'
-        echo 'Output from Find Tag: ${{steps.tagger_empty.outputs.tag}}'
