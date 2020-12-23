@@ -36,9 +36,11 @@ jobs:
         name: version.txt
         path: version.txt
 
-    - name: Commit version
-      run: |
-        git commit -am "Version file"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit and push
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_options: '--no-verify --signoff --amend'
+        file_pattern: version.txt
+        push_options: '--force'
+        skip_dirty_check: true
+        skip_fetch: true
