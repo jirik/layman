@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Echo variables
+    - uses: actions/checkout@v2
+    - name: Find Tag
+      id: tagger
+      uses: jimschubert/query-tag-action@v1
+
+    - name: Echo variables
         run: |
           echo "Commit SHA: ${GITHUB_SHA}"
           echo "Whole ref: ${GITHUB_REF}"
           branch=${GITHUB_REF#refs/heads/}
           echo "branch: ${branch}"
           echo "${GITHUB_REF}"
-          echo $PWD
-          cd ${GITHUB_WORKSPACE}
-          echo $PWD
-          git describe
-          git describe --tags
+          echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
