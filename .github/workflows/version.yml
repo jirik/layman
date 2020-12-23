@@ -1,0 +1,17 @@
+name: Version
+
+on: [push]
+
+jobs:
+  Version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Echo variables
+        run: |
+          echo "Commit SHA: ${GITHUB_SHA}"
+          echo "Whole ref: ${GITHUB_REF}"
+          branch=${GITHUB_REF#refs/heads/}
+          echo "branch: ${branch}"
+          echo ${GITHUB_REF}"
