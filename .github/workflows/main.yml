@@ -13,18 +13,31 @@ jobs:
       id: tagger
       uses: jimschubert/query-tag-action@v1
 
-    - id: get_version
-      uses: battila7/get-version-action@v2
 
     - name: Echo variables
       run: |
-        echo "Commit SHA: ${GITHUB_SHA}"
-        echo "Whole ref: ${GITHUB_REF}"
         branch=${GITHUB_REF#refs/heads/}
         tag=${GITHUB_REF#refs/tags/}
+        echo "Commit SHA: ${GITHUB_SHA}"
+        echo "Whole ref: ${GITHUB_REF}"
         echo "branch: ${branch}"
         echo "tag: ${tag}"
-        echo "${GITHUB_REF}"
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
-        echo ${{ steps.get_version.outputs.version }}
-        echo ${{ steps.get_version.outputs.version-without-v }}
+
+        echo "Commit SHA: ${GITHUB_SHA}" > version.txt
+        echo "Whole ref: ${GITHUB_REF}"" >> version.txt
+        echo "branch: ${branch}" >> version.txt
+        echo "tag: ${tag}" >> version.txt
+        echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}' >> version.txt
+
+    - name: Upload version.txt
+      uses: actions/upload-artifact@v2
+      with:
+        name: version.txt
+        path: version.txt
+
+    - name: Commit version
+      run: |
+        git add -a version.txt
+        git commit -am "Version file"
+        git push
