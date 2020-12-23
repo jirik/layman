@@ -30,6 +30,13 @@ jobs:
         echo "tag: ${tag}" >> version.txt
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}' >> version.txt
 
+    - name: Direct echo
+      run: |
+        git config --local user.email "auto_action@github"
+        git config --local user.name "AUTOMAT"
+        git describe >> version.txt
+        git describe --tag >> version.txt
+
     - name: Upload version.txt
       uses: actions/upload-artifact@v2
       with:
