@@ -15,5 +15,6 @@ jobs:
           branch=${GITHUB_REF#refs/heads/}
           echo "branch: ${branch}"
           echo "${GITHUB_REF}"
+          cd ${GITHUB_WORKSPACE}
           git describe
           git describe --tags
