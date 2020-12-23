@@ -11,7 +11,10 @@ jobs:
     - name: Find Tag
       id: tagger
       uses: jimschubert/query-tag-action@v1
-
+      with:
+        include: '*'
+        exclude: '*-rc*'
+        commit-ish: 'HEAD~'
     - name: Echo variables
         run: |
           echo "Commit SHA: ${GITHUB_SHA}"
