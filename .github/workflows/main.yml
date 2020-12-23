@@ -40,3 +40,5 @@ jobs:
       run: |
         git commit -am "Version file"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
