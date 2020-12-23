@@ -38,6 +38,5 @@ jobs:
 
     - name: Commit version
       run: |
-        git add -a version.txt
         git commit -am "Version file"
         git push
