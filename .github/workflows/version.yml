@@ -14,4 +14,6 @@ jobs:
           echo "Whole ref: ${GITHUB_REF}"
           branch=${GITHUB_REF#refs/heads/}
           echo "branch: ${branch}"
-          echo ${GITHUB_REF}"
+          echo "${GITHUB_REF}"
+          git describe
+          git describe --tags
