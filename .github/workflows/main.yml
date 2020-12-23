@@ -47,5 +47,5 @@ jobs:
       run: |
         git config --local user.email "auto_action@github"
         git config --local user.name "AUTOMAT"
-        git commit --amend --no-edit
+        git commit -a --amend --no-edit
         git push --force
