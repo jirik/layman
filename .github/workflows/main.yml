@@ -8,9 +8,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Find Tag
       id: tagger
       uses: jimschubert/query-tag-action@v1
+
+    - id: get_version
+      uses: battila7/get-version-action@v2
 
     - name: Echo variables
       run: |
@@ -22,3 +26,5 @@ jobs:
         echo "tag: ${tag}"
         echo "${GITHUB_REF}"
         echo 'Output from Find Tag: ${{steps.tagger.outputs.tag}}'
+        echo ${{ steps.get_version.outputs.version }}
+        echo ${{ steps.get_version.outputs.version-without-v }}
