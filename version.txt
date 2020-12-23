@@ -1,0 +1,5 @@
+Commit SHA: 8ee7e0ef4b4177890573ea6b5464224e3b5730e2
+Whole ref: refs/heads/github-action-version
+branch: github-action-version
+tag: refs/heads/github-action-version
+Output from Find Tag: v1.8.0
