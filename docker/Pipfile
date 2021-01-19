@@ -12,6 +12,7 @@ pylint = "*"
 autopep8 = "*"
 pytest-rerunfailures = "*"
 pytest-timeout = "*"
+pytest-xdist = "*"
 
 [packages]
 celery = {extras = ["redis"],version = "<5.0.0"}
