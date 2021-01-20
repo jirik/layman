@@ -28,6 +28,7 @@ cacheout = "*"
 kombu = "==4.6.10"
 pyproj = "<3.0.0"
 pycld2 = "*"
+pytest-parallel = "*"
 
 [requires]
 python_version = "3.6"
