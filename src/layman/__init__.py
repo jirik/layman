@@ -7,7 +7,7 @@ import time
 from redis import WatchError
 
 IN_CELERY_WORKER_PROCESS = sys.argv and sys.argv[0].endswith('/celery/__main__.py')
-IN_PYTEST_PROCESS = sys.argv and sys.argv[0].endswith('/pytest/__main__.py')
+IN_PYTEST_PROCESS = sys.argv and (sys.argv[0].endswith('/pytest/__main__.py')  or sys.argv[0] == '-c')
 IN_FLOWER_PROCESS = sys.argv and sys.argv[0].endswith('/flower/__main__.py')
 IN_FLASK_PROCESS = sys.argv and (sys.argv[0].endswith('/flask') or sys.argv[0].endswith('/gunicorn'))
 assert [
@@ -15,7 +15,7 @@ assert [
     IN_PYTEST_PROCESS,
     IN_FLOWER_PROCESS,
     IN_FLASK_PROCESS,
-].count(True) == 1, f"IN_CELERY_WORKER_PROCESS={IN_CELERY_WORKER_PROCESS}, IN_PYTEST_PROCESS={IN_PYTEST_PROCESS}, IN_FLOWER_PROCESS={IN_FLOWER_PROCESS}, IN_FLASK_PROCESS={IN_FLASK_PROCESS}, sys.argv[0]={sys.argv[0]}"
+].count(True) == 1, f"IN_CELERY_WORKER_PROCESS={IN_CELERY_WORKER_PROCESS}, IN_PYTEST_PROCESS={IN_PYTEST_PROCESS}, IN_FLOWER_PROCESS={IN_FLOWER_PROCESS}, IN_FLASK_PROCESS={IN_FLASK_PROCESS}, sys.argv[0]={sys.argv[0]}, sys.argv={sys.argv}"
 
 settings = importlib.import_module(os.environ['LAYMAN_SETTINGS_MODULE'])
 
