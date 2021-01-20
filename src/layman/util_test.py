@@ -27,6 +27,7 @@ def test_check_reserved_workspace_names():
             assert exc_info.value.data['reserved_by'] == 'RESERVED_WORKSPACE_NAMES'
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_get_users_workspaces():
     public_workspace = 'test_get_users_workspaces_workspace'
@@ -73,6 +74,7 @@ def assert_module_methods(module, methods):
                 f'Module {module.__name__} does not have {method} method.')
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_publication_interface_methods():
     publication_source_methods = {
@@ -176,6 +178,7 @@ class TestGetPublicationInfosClass:
         (LAYER_TYPE, {'actor_name': actor, 'access_type': 'read'}, {layer_both, layer_read},),
         (LAYER_TYPE, {'actor_name': actor, 'access_type': 'write'}, {layer_both},),
     ], )
+    @pytest.mark.serial
     @pytest.mark.usefixtures('liferay_mock', 'ensure_layman', 'provide_publications')
     def test_get_publication_infos(self,
                                    publ_type,
@@ -188,6 +191,7 @@ class TestGetPublicationInfosClass:
 
 
 @pytest.mark.parametrize('publication_type', process_client.PUBLICATION_TYPES)
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_publication_infos(publication_type):
     workspace = 'test_get_publication_infos_user'

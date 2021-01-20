@@ -9,6 +9,7 @@ from layman import util as layman_util
 from test import process_client
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_layer_title():
     username = 'test_get_layer_title_user'

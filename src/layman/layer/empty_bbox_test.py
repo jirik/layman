@@ -47,6 +47,7 @@ def wfs_t_insert_point(workspace, layername):
     ('empty', get_shp_file_paths('sample/layman.layer/empty.shp')),
     ('single_point', get_shp_file_paths('sample/layman.layer/single_point.shp')),
 ])
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_empty_shapefile(layername, file_paths):
     workspace = 'test_empty_bbox_workspace'

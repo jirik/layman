@@ -100,6 +100,7 @@ def app_context():
         yield ctx
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_maps_empty(client):
     username = 'testuser1'
@@ -114,6 +115,7 @@ def test_get_maps_empty(client):
         })
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_wrong_value_of_mapname(client):
     username = 'testuser1'
@@ -128,6 +130,7 @@ def test_wrong_value_of_mapname(client):
         assert resp_json['detail']['parameter'] == 'mapname'
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_no_file(client):
     rv = client.post(url_for('rest_maps.post', username='testuser1'))
@@ -138,6 +141,7 @@ def test_no_file(client):
     assert resp_json['detail']['parameter'] == 'file'
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_post_maps_invalid_file(client):
     username = 'testuser1'
@@ -164,6 +168,7 @@ def test_post_maps_invalid_file(client):
             fp[0].close()
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_post_maps_invalid_json(client):
     username = 'testuser1'
@@ -194,6 +199,7 @@ def test_post_maps_invalid_json(client):
     })
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_post_maps_simple(client):
     with app.app_context():
@@ -316,6 +322,7 @@ def test_post_maps_simple(client):
     check_metadata(client, username, mapname, METADATA_PROPERTIES_EQUAL, expected_md_values)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_post_maps_complex(client):
     with app.app_context():
@@ -444,6 +451,7 @@ def test_post_maps_complex(client):
     check_metadata(client, username, mapname, METADATA_PROPERTIES_EQUAL, expected_md_values)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_patch_map(client):
     with app.app_context():
@@ -575,6 +583,7 @@ def test_patch_map(client):
     check_metadata(client, username, mapname, METADATA_PROPERTIES_EQUAL, expected_md_values)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_delete_map(client):
     with app.app_context():
@@ -607,6 +616,7 @@ def test_delete_map(client):
         })
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_map_composed_from_local_layers(client):
     with app.app_context():

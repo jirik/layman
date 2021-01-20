@@ -16,6 +16,7 @@ DB_SCHEMA = settings.LAYMAN_PRIME_SCHEMA
 logger = logging.getLogger(__name__)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_recreate_schema():
     username = 'test_recreate_schema_user'
@@ -35,6 +36,7 @@ def test_recreate_schema():
         assert len(pubs) == 0
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_schema():
     username = 'test_schema_user'
@@ -66,6 +68,7 @@ def test_schema():
         assert len(pubs) == 0
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_steps():
     username = 'test_steps_user'

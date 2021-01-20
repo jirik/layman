@@ -9,6 +9,7 @@ from layman import util as layman_util
 from test import process_client
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_map_title():
     username = 'test_get_map_title_user'
@@ -35,6 +36,7 @@ def test_get_map_title():
         process_client.delete_map(username, name)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_maps():
     username = 'test_get_maps_user'

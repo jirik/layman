@@ -132,6 +132,7 @@ def no_micka_url():
     settings.CSW_URL = csw_url
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_layer', 'broken_micka_url')
 def test_delete_layer_broken_micka():
     with pytest.raises(LaymanError) as exc_info:
@@ -140,18 +141,21 @@ def test_delete_layer_broken_micka():
     assert exc_info.value.code == 38
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'broken_micka_url')
 def test_get_layer_info_broken_micka():
     layer_info = get_layer_info('abc', 'abcd')
     assert layer_info == {}
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'no_micka_url')
 def test_get_layer_info_no_micka():
     layer_info = get_layer_info('abc', 'abcd')
     assert layer_info == {}
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_layer', 'no_micka_url')
 def test_delete_layer_no_micka():
     with pytest.raises(LaymanError) as exc_info:
@@ -160,6 +164,7 @@ def test_delete_layer_no_micka():
     assert exc_info.value.code == 38
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_layer')
 def test_patch_layer_without_metadata(client):
     with app.app_context():
@@ -167,6 +172,7 @@ def test_patch_layer_without_metadata(client):
     patch_layer(client)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_public_metadata(provide_layer):
     uuid = provide_layer['uuid']

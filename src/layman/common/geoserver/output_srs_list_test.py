@@ -31,6 +31,7 @@ def ensure_layer(delete_layer_after_test):
     yield ensure_layer_internal
 
 
+@pytest.mark.serial
 def test_custom_srs_list(ensure_layer):
     workspace = 'test_custom_srs_list_workspace'
     layername1 = 'test_custom_srs_list_layer1'
@@ -71,6 +72,7 @@ def assert_wfs_output_srs_list(workspace, layername, expected_output_srs_list):
 
 # expected coordinates manually copied from QGIS 3.16.2 in given EPSG
 # point_id 1: northernmost vertex of fountain at Moravske namesti, Brno
+@pytest.mark.serial
 @pytest.mark.parametrize('point_id, epsg_code, exp_coordinates, precision', [
     (1, 3857, (1848649.486, 6308703.297), 0.2),
     # ~5 meters! By default, GeoServer limits WFS output to 4 decimal places, about 10 m accuracy

@@ -12,7 +12,6 @@ pylint = "*"
 autopep8 = "*"
 pytest-rerunfailures = "*"
 pytest-timeout = "*"
-pytest-xdist = "*"
 
 [packages]
 celery = {extras = ["redis"],version = "<5.0.0"}
@@ -28,7 +27,7 @@ cacheout = "*"
 kombu = "==4.6.10"
 pyproj = "<3.0.0"
 pycld2 = "*"
-pytest-parallel = "*"
+pytest-xdist = "*"
 
 [requires]
 python_version = "3.6"

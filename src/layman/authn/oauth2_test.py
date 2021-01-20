@@ -204,6 +204,7 @@ def test_unexisting_introspection_url(client, headers):
         f'{TOKEN_HEADER}': 'Bearer abc',
     }
 ])
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'inactive_token_introspection_url', 'ensure_layman')
 def test_token_inactive(client, headers):
     username = 'testuser1'
@@ -222,6 +223,7 @@ def test_token_inactive(client, headers):
         f'{TOKEN_HEADER}': 'Bearer abc',
     }
 ])
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'active_token_introspection_url', 'ensure_layman')
 def test_token_active(client, headers):
     username = 'testuser1'
@@ -231,6 +233,7 @@ def test_token_active(client, headers):
     assert resp_json['code'] == 40
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'active_token_introspection_url', 'user_profile_url', 'ensure_layman')
 def test_authn_get_current_user_without_username(client):
     rest_path = url_for('rest_current_user.get')
@@ -283,6 +286,7 @@ def test_patch_current_user_anonymous(client):
     assert resp_json['code'] == 30
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('active_token_introspection_url', 'user_profile_url', 'ensure_layman')
 def test_patch_current_user_without_username():
 

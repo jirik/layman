@@ -6,6 +6,7 @@ from layman.util import url_for
 from layman.common.prime_db_schema import ensure_whole_user
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_users():
     username = 'test_get_users_user'

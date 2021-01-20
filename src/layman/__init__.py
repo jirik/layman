@@ -7,7 +7,7 @@ import time
 from redis import WatchError
 
 IN_CELERY_WORKER_PROCESS = sys.argv and sys.argv[0].endswith('/celery/__main__.py')
-IN_PYTEST_PROCESS = sys.argv and (sys.argv[0].endswith('/pytest/__main__.py')  or sys.argv[0] == '-c')
+IN_PYTEST_PROCESS = sys.argv and (sys.argv[0].endswith('/pytest/__main__.py') or sys.argv[0] == '-c')
 IN_FLOWER_PROCESS = sys.argv and sys.argv[0].endswith('/flower/__main__.py')
 IN_FLASK_PROCESS = sys.argv and (sys.argv[0].endswith('/flask') or sys.argv[0].endswith('/gunicorn'))
 assert [

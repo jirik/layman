@@ -6,6 +6,7 @@ from layman.common.micka import util as micka_util
 
 
 @pytest.mark.parametrize('publ_type', process_client.PUBLICATION_TYPES)
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_wrong_post(publ_type):
     def check_response(resp):
@@ -65,7 +66,8 @@ class TestSoapClass:
                                           self.publication_name,
                                           headers=self.authz_headers)
 
-    @pytest.mark.flaky(reruns=5, reruns_delay=2)
+    @pytest.mark.flaky(reruns=5, reruns_delay=4)
+    @pytest.mark.serial
     @pytest.mark.usefixtures('liferay_mock', 'ensure_layman', 'reserve_username', 'clear_data')
     @pytest.mark.parametrize('params_and_expected_list', [
         # (input access rights, expected public visibility of metadata record)

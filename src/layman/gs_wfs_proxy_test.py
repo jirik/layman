@@ -12,6 +12,7 @@ from layman.layer.geoserver import wfs as geoserver_wfs
 from layman.common.geoserver import get_layer_thumbnail, get_layer_square_bbox
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_rest_get():
     username = 'wfs_proxy_test'
@@ -51,6 +52,7 @@ def setup_user_layer(username, layername, authn_headers):
     assert ln == layername
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_wfs_proxy():
     username = 'testproxy'
@@ -136,6 +138,7 @@ def test_wfs_proxy():
     client_util.delete_layer(username, layername1, headers)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 @pytest.mark.parametrize('service_endpoint', ['ows', 'wms'])
 def test_wms_ows_proxy(service_endpoint):
@@ -164,6 +167,7 @@ def test_wms_ows_proxy(service_endpoint):
     client_util.delete_layer(username, layername, headers=authn_headers)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_missing_attribute():
     username = 'testmissingattr'
@@ -289,6 +293,7 @@ def test_missing_attribute():
     client_util.delete_layer(username, layername2, headers)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_missing_attribute_authz():
     username = 'testmissingattr_authz'

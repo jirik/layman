@@ -10,6 +10,7 @@ from test import process_client
 from layman.util import url_for
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_sld_value():
     username = 'test_layer_sld_user'

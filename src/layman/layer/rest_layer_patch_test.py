@@ -67,6 +67,7 @@ def ensure_user():
         assert_gs_user_and_roles(tmp_username)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('liferay_mock', 'ensure_layman_module', 'ensure_user')
 @pytest.mark.parametrize("access_rights_and_expected_list", [
     [

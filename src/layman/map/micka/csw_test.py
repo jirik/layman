@@ -149,6 +149,7 @@ def no_micka_url():
     settings.CSW_URL = csw_url
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_map', 'broken_micka_url')
 def test_delete_map_broken_micka():
     with pytest.raises(LaymanError) as exc_info:
@@ -157,18 +158,21 @@ def test_delete_map_broken_micka():
     assert exc_info.value.code == 38
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'broken_micka_url')
 def test_get_map_info_broken_micka():
     map_info = get_map_info('abc', 'abcd')
     assert map_info == {}
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'no_micka_url')
 def test_get_map_info_no_micka():
     map_info = get_map_info('abc', 'abcd')
     assert map_info == {}
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_map', 'no_micka_url')
 def test_delete_map_no_micka():
     with pytest.raises(LaymanError) as exc_info:
@@ -177,6 +181,7 @@ def test_delete_map_no_micka():
     assert exc_info.value.code == 38
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'provide_map')
 def test_patch_map_without_metadata(client):
     with app.app_context():
@@ -184,6 +189,7 @@ def test_patch_map_without_metadata(client):
     patch_map(client)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_public_metadata(provide_map):
     uuid = provide_map['uuid']

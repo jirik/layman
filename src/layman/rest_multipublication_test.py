@@ -15,6 +15,7 @@ class TestDeletePublicationsClass:
         yield
 
     @pytest.mark.parametrize('publ_type', process_client.PUBLICATION_TYPES)
+    @pytest.mark.serial
     @pytest.mark.usefixtures('liferay_mock', 'ensure_layman', 'provide_data')
     def test_delete_publications(self,
                                  publ_type):

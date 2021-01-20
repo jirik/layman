@@ -7,6 +7,7 @@ from layman.util import url_for
 from test import process_client
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_get_layer_style():
     username = 'test_get_layer_style_user'

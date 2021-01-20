@@ -38,6 +38,7 @@ def app_context():
         yield ctx
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_fill_template(client):
     xml_path = 'tmp/record-template.xml'
@@ -112,6 +113,7 @@ def test_parse_md_properties():
                            equals_fn), f"Values of property {k} do not equal: {props[k]} != {expected[k]}"
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('app_context', 'ensure_layman')
 def test_fill_xml_template(client):
     xml_file_object = common_util.fill_xml_template_as_pretty_file_object('src/layman/map/micka/record-template.xml', {

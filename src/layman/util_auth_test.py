@@ -43,6 +43,7 @@ def prep_test_get_publication_info():
     (LAYER_TYPE, layer, {'sources_filter': 'layman.layer.micka.soap'}, {'metadata', }, {'name', 'title', 'access_rights', 'uuid', 'file', }),
     (MAP_TYPE, map, {'sources_filter': 'layman.map.filesystem.thumbnail'}, {'thumbnail'}, {'name', 'title', 'access_rights', 'uuid', 'file', 'metadata', }),
 ])
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock', 'prep_test_get_publication_info')
 def test_get_publication_info(pub_type,
                               pub_name,

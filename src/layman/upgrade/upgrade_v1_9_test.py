@@ -18,6 +18,7 @@ def assert_roles(workspace,
         assert roles == expected_roles
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_geoserver_everyone_rights_repair():
     workspace = 'test_geoserver_everyone_rights_repair_workspace'
@@ -37,6 +38,7 @@ def test_geoserver_everyone_rights_repair():
     assert_roles(workspace, layer, expected_roles2)
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_geoserver_remove_users_for_public_workspaces():
     workspace = 'test_geoserver_remove_users_for_public_workspaces_workspace'

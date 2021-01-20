@@ -4,6 +4,7 @@ from layman import settings, app
 from layman.common import prime_db_schema
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman')
 def test_http_header():
     username = 'test_http_header_user'

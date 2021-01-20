@@ -18,6 +18,7 @@ def assert_operates_on(workspace, mapname, expected_layers, authz_headers):
             operates_on_value), f"Expected layers {expected_layers}, found {json.dumps(operates_on_value, indent=2)}"
 
 
+@pytest.mark.serial
 @pytest.mark.usefixtures('ensure_layman', 'liferay_mock')
 def test_map_with_unauthorized_layer():
     username1 = 'test_map_with_unauthorized_layer_user1'
