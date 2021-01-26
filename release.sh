@@ -30,15 +30,26 @@ minor=${major_rest%%.*}
 minor_rest=${major_rest#*.}
 patch=${minor_rest%%-*}
 
-echo "branch_name = $branch_name"
-echo "working_version = $working_version"
-echo "major = $major"
-echo "minor = $minor"
-echo "patch = $patch"
+new_minor=$((minor+1))
+new_version="v$major.$new_minor.0"
+
+#echo "branch_name = $branch_name"
+#echo "working_version = $working_version"
+#echo "major = $major"
+#echo "minor = $minor"
+#echo "patch = $patch"
+
+# So far, I can do only minor release
+if [ ${patch} != "0" ]; then
+  echo 'ERROR! Not minor release.'
+  exit 2
+fi
 
 # TODO check combination
 # make summary and ask user for confirmation
-echo "You are going to release from branch '$branch_name' version '$version'. Do you want to proceed? [Y]"
+echo "You are going to release from branch '$branch_name' version '$version'."
+echo "New version will be called '$new_version'."
+echo "Do you want to proceed? [Y/n]"
 read answer
 
 if [[ ${answer} != 'y' && ${answer} != 'Y' && -n ${answer} ]]; then
@@ -47,23 +58,42 @@ if [[ ${answer} != 'y' && ${answer} != 'Y' && -n ${answer} ]]; then
 fi
 
 # create branch for release
-#git checkout -b "Release $version"
+git fetch
+# !!!!!!!!!!!!!!!!!!!!!!!!!+
+#git checkout -b "releasing-$version"
 
-cur_date_time=$(date +"%Y-%m-%d %T")
-cur_date=$(date +"%Y-%m-%d")
+cur_date_time=$(date --utc +"%Y-%m-%d %TZ")
+cur_date=$(date --utc +"%Y-%m-%d")
 
 # update version.txt
 echo $version > version.txt
+# put date of release into CHANGELOG.md
 echo $cur_date_time >> version.txt
 
-# put date of release into CHANGELOG.md
-
+sed -i "s/{release-date}/$cur_date/" CHANGELOG.md
 
 # creates release commit, tag it, push it
-# in case of minor release, create brach X.Y.x
+git add version.txt
+git add CHANGELOG.md
+git commit -m "Release $version"
+git tag -a $version -m "Release $version"
+
 # update version.txt
+cur_date_time=$(date --utc +"%Y-%m-%d %TZ")
+echo "$new_version-dev" > version.txt
+echo $cur_date_time >> version.txt
+
 # update CHANGELOG.md (add structure for next version)
+changelog_template="# Changelog\n\n## $new_version\n  {release-date}\n### Upgrade requirements\n### Migrations\n### Changes/"
+echo "changelog_template = $changelog_template"
+sed -i "s/^# Changelog/$changelog_template" CHANGELOG.md
+
 # commit with next version
+git add version.txt
+git add CHANGELOG.md
+git commit -m "Setup $new_version"
+
+# in case of minor release, create brach X.Y.x
 # create pull request
 #
 # checkout X.Y.x
@@ -71,3 +101,6 @@ echo $cur_date_time >> version.txt
 # update CHANGELOG.md (add structure for next version)
 # commit with next version
 # push
+
+#git push --tags
+#git push
