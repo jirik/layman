@@ -3,7 +3,9 @@
 ## v1.10.0
   {release-date}
 ### Upgrade requirements
-### Migrations
+- [#154](https://github.com/jirik/layman/issues/154) Before upgrade, check names of all users in system and if any of them ended with '_wms', contact the Layman contributors (for example by creating issue at https://github.com/jirik/layman/issues/) and do not upgrade to v1.10.0.
+### Migrations and checks
+- [#154](https://github.com/jirik/layman/issues/154)  All workspaces are checked, that their name did not end with '_wms'. With any of the workspaces ended with the suffix, startup process is stopped.
 ### Changes
 - [#99](https://github.com/jirik/layman/issues/99) New endpoint [`/rest/about/version'](doc/rest.md#get-version). Also available in Layman Test Client.
 
