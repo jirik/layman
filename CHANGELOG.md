@@ -8,6 +8,7 @@
 - [#154](https://github.com/jirik/layman/issues/154)  All workspaces are checked, that their name did not end with '_wms'. With any of the workspaces ended with the suffix, startup process is stopped.
 ### Changes
 - [#99](https://github.com/jirik/layman/issues/99) New endpoint [`/rest/about/version'](doc/rest.md#get-version). Also available in Layman Test Client.
+- [#154](https://github.com/jirik/layman/issues/154) Workspace name can not end with '_wms'. In such case, error with code 45 is raised.
 
 ## v1.9.1
  2021-01-18
