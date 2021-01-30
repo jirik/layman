@@ -70,7 +70,7 @@ class TestSoapClass:
                                           self.publication_name,
                                           headers=self.authz_headers)
 
-    @pytest.mark.flaky(reruns=5, reruns_delay=2)
+    @pytest.mark.flaky(reruns=5, reruns_delay=5)
     @pytest.mark.usefixtures('liferay_mock', 'ensure_layman', 'reserve_username', 'clear_data')
     @pytest.mark.parametrize('params_and_expected_list', [
         # (input access rights, expected public visibility of metadata record)
