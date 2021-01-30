@@ -1,5 +1,9 @@
 from layman import util as layman_util, settings
 from layman.http import LaymanError
+from layman import util
+from layman.layer import LAYER_TYPE
+from layman.layer import geoserver
+from layman.layer.geoserver import wms
 
 
 def check_usernames_for_wms_suffix():
@@ -13,3 +17,19 @@ def check_usernames_for_wms_suffix():
                               data={'workspace': workspace,
                                     }
                               )
+
+
+def migrate_layers_to_wms_workspace():
+    infos = util.get_publication_infos(publ_type=LAYER_TYPE)
+    for (workspace, publication_type, layer) in infos.keys():
+        info = util.get_publication_info(workspace, publication_type, layer)
+        geoserver_workspace = wms.get_geoserver_workspace(workspace)
+        geoserver.ensure_workspace(workspace)
+
+        geoserver.publish_layer_from_db(workspace,
+                                        layer,
+                                        info.get('description'),
+                                        info.get('title'),
+                                        info.get('access_rights'),
+                                        geoserver_workspace=geoserver_workspace)
+        wms.clear_cache(workspace)
